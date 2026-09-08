@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   ЧИСТОВИК — Design System
+   Концепция: аудиофильский минимализм, ламповая техника
+   Палитра: графит + слоновая кость + медь
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Base */
+  --color-ink: #0A0A0B;
+  --color-ink-elevated: #111113;
+  --color-ink-surface: #161618;
+  --color-ink-border: #1F1F23;
+  --color-ink-border-strong: #2A2A30;
+
+  /* Paper (light elements on dark) */
+  --color-paper: #F5F2EC;
+  --color-paper-muted: #A8A29E;
+  --color-paper-dim: #6B7280;
+
+  /* Copper — фирменный акцент (ламповый, тёплый) */
+  --color-copper: #D97757;
+  --color-copper-hover: #E8876A;
+  --color-copper-dim: #A85A40;
+  --color-copper-glow: rgba(217, 119, 87, 0.12);
+
+  /* Semantic */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
+  letter-spacing: -0.01em;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-copper);
+  color: var(--color-ink);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-border-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-paper-dim);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Typography
+   ═══════════════════════════════════════════════════════════════ */
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'ss01', 'zero';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Components
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Surface — базовая карточка, без glow, без blur */
+.surface {
+  background: var(--color-ink-surface);
+  border: 1px solid var(--color-ink-border);
+  transition: border-color 180ms ease;
+}
+.surface:hover {
+  border-color: var(--color-ink-border-strong);
+}
+
+/* Elevated surface */
+.surface-elevated {
+  background: var(--color-ink-elevated);
+  border: 1px solid var(--color-ink-border);
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--color-ink-border);
+}
+
+/* Focus ring — медный, тонкий */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--color-copper);
+}
+
+/* Input */
+.input {
+  background: var(--color-ink);
+  border: 1px solid var(--color-ink-border);
+  color: var(--color-paper);
+  transition: border-color 180ms ease;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-copper);
+}
+.input::placeholder {
+  color: var(--color-paper-dim);
+}
+
+/* Button variants */
+.btn-primary {
+  background: var(--color-copper);
+  color: var(--color-ink);
+  font-weight: 500;
+  transition: background 180ms ease, transform 120ms ease;
+}
+.btn-primary:hover {
+  background: var(--color-copper-hover);
+}
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--color-ink-border);
+  color: var(--color-paper);
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.btn-ghost:hover {
+  border-color: var(--color-paper-dim);
+  background: var(--color-ink-elevated);
+}
+
+/* Tag / badge */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-ink-border);
+  color: var(--color-paper-muted);
+}
+.tag-copper {
+  border-color: var(--color-copper-dim);
+  color: var(--color-copper);
+  background: var(--color-copper-glow);
+}
+
+/* Marquee / ticker (для декоративных элементов) */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-ticker {
+  animation: ticker 40s linear infinite;
+}
+
+/* Progress bar (медный) */
+.progress-copper {
+  background: var(--color-ink-border);
+  overflow: hidden;
+}
+.progress-copper > div {
+  background: var(--color-copper);
+  height: 100%;
+  transition: width 300ms ease;
+}
+
+/* Noise texture overlay (лёгкий шум для премиальности) */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Grid pattern (для hero и декоративных секций) */
+.grid-bg {
+  background-image:
+    linear-gradient(var(--color-ink-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-ink-border) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Fade edges */
+.fade-mask {
+  mask-image: linear-gradient(to bottom, black 60%, transparent);
+}
+
+/* Copper underline (для ссылок) */
+.link-copper {
+  position: relative;
+  color: var(--color-paper);
+  transition: color 180ms ease;
+}
+.link-copper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--color-copper);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 300ms ease;
+}
+.link-copper:hover {
+  color: var(--color-copper);
+}
+.link-copper:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Number display (для статистики) */
+.num-display {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Waveform visualization */
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+.wave-bar {
+  animation: wave 1.2s ease-in-out infinite;
+  transform-origin: center;
+}

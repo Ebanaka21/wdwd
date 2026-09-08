@@ -1,0 +1,26 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (фронтенд)
+node_modules/
+dist/
+.next/
+build/
+*.log
