@@ -1,0 +1,55 @@
+[package]
+name = "chistovik-backend"
+version = "0.1.0"
+edition = "2021"
+description = "Backend API for Chistovik — закрытая платформа контента"
+authors = ["Chistovik Team"]
+
+[dependencies]
+# Web framework
+actix-web = "4"
+actix-rt = "2"
+actix-cors = "0.7"
+actix-files = "0.6"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "migrate"] }
+
+# Authentication
+jsonwebtoken = "9"
+bcrypt = "0.15"
+
+# Async
+tokio = { version = "1", features = ["full"] }
+futures = "0.3"
+
+# Utilities
+uuid = { version = "1", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+dotenv = "0.15"
+env_logger = "0.10"
+log = "0.4"
+thiserror = "1"
+anyhow = "1"
+
+# Redis for caching/rate limiting
+redis = { version = "0.23", features = ["tokio-comp"] }
+
+# Object storage (S3)
+rust-s3 = { version = "0.33", features = ["tokio-rustls-tls"] }
+
+# Payment integrations
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+
+# Media processing
+tokio-ffmpeg = "0.1"
+
+# Email notifications
+lettre = { version = "0.11", features = ["tokio1-rustls-tls", "smtp-transport"] }
+
+[dev-dependencies]
+actix-test = "0.1"
